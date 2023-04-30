@@ -8,7 +8,7 @@ type Node interface {
 	TokenLiteral() string
 }
 
-type Statement interface { //プログラム内の文を表現するインターフェイス
+type Statement interface {
 	Node
 	statementNode()
 }
@@ -32,17 +32,17 @@ func (p *Program) TokenLiteral() string {
 
 type LetStatement struct {
 	Token token.Token
-	Name  *Indentifier
+	Name  *Identifier
 	Value Expression
 }
 
-func (ls *LetStatement) expressionNode()      {}
+func (ls *LetStatement) statementNode()       {}
 func (ls *LetStatement) TokenLiteral() string { return ls.Token.Literal }
 
-type Indentifier struct {
-	Token token.Token
+type Identifier struct {
+	Token token.Token // The token.IDENT token
 	Value string
 }
 
-func (i *Indentifier) expressionNode()      {}
-func (i *Indentifier) TokenLiteral() string { return i.Token.Literal }
+func (i *Identifier) expressionNode()      {}
+func (i *Identifier) TokenLiteral() string { return i.Token.Literal }
