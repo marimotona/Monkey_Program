@@ -4,6 +4,8 @@ import (
 	"monkey/token"
 )
 
+// ソースコードを解析し、トークンを抽象構文木に変換する際に、これらのインターフェイスを使用する
+
 type Node interface {
 	TokenLiteral() string
 }
