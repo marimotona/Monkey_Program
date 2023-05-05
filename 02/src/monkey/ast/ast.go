@@ -11,16 +11,24 @@ import (
 type Node interface {
 	TokenLiteral() string
 	String() string
+	//TreePrinter
+}
+
+type TreePrinter interface {
+	ToTree() string
+	ToTreeIndent(indent string, buf *strings.Builder)
 }
 
 type Statement interface {
 	Node
 	statementNode()
+	//TreePrinter
 }
 
 type Expression interface { //プログラム内の式を表現するインターフェイス
 	Node
 	expressionNode()
+	//TreePrinter
 }
 
 type Program struct {
@@ -45,6 +53,21 @@ func (p *Program) String() string {
 
 	return out.String()
 }
+
+// func (p *Program) ToTree() string {
+// 	var buf strings.Builder
+// 	p.ToTreeIndent("", &buf)
+// 	return buf.String()
+// }
+
+// func (p *Program) ToTreeIndent(indent string, buf *strings.Builder) {
+// 	buf.WriteString(indent + "Program\n")
+// 	indent += "  "
+
+// 	for _, s := range p.Statements {
+// 		s.ToTreeIndent(indent, buf)
+// 	}
+// }
 
 type LetStatement struct {
 	Token token.Token
