@@ -1,7 +1,7 @@
 package evaluator
 
 import (
-	"monkey/ast"
+	//"monkey/ast"
 	"monkey/lexer"
 	"monkey/object"
 	"monkey/parser"
@@ -27,9 +27,10 @@ func testEval(input string) object.Object {
 	l := lexer.New(input)
 	p := parser.New(l)
 	program := p.ParseProgram()
-	env := object.NewEnvironment()
+	//env := object.NewEnvironment()
 
-	return Eval(program, env)
+	// return Eval(program, env)
+	return Eval(program)
 }
 
 func testIntegerObject(t *testing.T, obj object.Object, expected int64) bool {
@@ -45,13 +46,4 @@ func testIntegerObject(t *testing.T, obj object.Object, expected int64) bool {
 	}
 
 	return true
-}
-
-func Eval(node ast.Node) object.Object {
-	switch node := node.(type) {
-	case *ast.IntegerLiteral:
-		return &object.Integer{Value: node.Value}
-	}
-
-	return nil
 }
